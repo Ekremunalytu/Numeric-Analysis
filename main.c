@@ -10,6 +10,7 @@ struct Polynom{
     int n;
     struct Term *Terms;
 }; 
+int Polynom_Base;
 
 void Create (struct Polynom *p){
     int i;
@@ -17,10 +18,14 @@ void Create (struct Polynom *p){
     scanf("%d", &p -> n);
 
     p -> Terms = (struct Term  *) malloc((p->n) * sizeof(struct Term));
+    printf("Enter base: ");
+    scanf("%d" , &Polynom_Base);
+
 
     printf("Enter Terms\n");
     for (i = 0  ; i < p -> n ; i++){
-        scanf("%d%d" , &p->Terms[i].Coefficient , &p->Terms[i].Exponent);
+        p -> Terms[i].Coefficient = Polynom_Base;
+        scanf("%d" ,  &p->Terms[i].Exponent);   
     }
 }
 
@@ -35,7 +40,13 @@ void Print_Polynom (struct Polynom p){
     printf("\n");
 };
 
-
+int Calculate_Polynom_Value(struct Polynom p){
+    int sum = 0;
+    for (int i = 0 ; i < p.n ; i++){
+        sum += pow( Polynom_Base , p.Terms[i].Exponent);
+        };
+    return sum;
+};
 
 
 
@@ -47,7 +58,7 @@ int main() {
     
     int operation;
     int in_program = 1;
-    
+    int Bisection_Floor,Bisection_Ceiling;
     
 
     
@@ -61,26 +72,30 @@ int main() {
     printf("Enter a designed number to make an matematical operation you wished for .\n");
     printf("Enter 1 to perform bisection method\n");
     scanf("%d" , &operation);
+
     if(operation == 1){ //switch case içerisinde scanf çalışmadığı için harici olarak aldım.
         printf("Enter floor and ceiling for bisection method.\n");
-        int floor,ceiling;
+        
         printf("For floor: ");
-        scanf("%d" , &floor);
+        scanf("%d" , &Bisection_Floor);
         printf("\nFor ceiling: ");
-        scanf("%d" , &ceiling);
-        if(floor > ceiling){
+        scanf("%d" , &Bisection_Ceiling);
+        if(Bisection_Floor > Bisection_Ceiling){
             printf("You entered wrong floor and ceiling value !!!!!\n");
             printf("Switching values.\n");
-            int Bisection_Switch_Temp = floor;
-            floor = ceiling;
-            ceiling = Bisection_Switch_Temp;
-            printf("[%d,%d]" ,floor,ceiling);
+            int Bisection_Switch_Temp = Bisection_Floor;
+            Bisection_Floor = Bisection_Ceiling;
+            Bisection_Ceiling = Bisection_Switch_Temp;
+            printf("[%d,%d]" ,Bisection_Floor,Bisection_Ceiling);
         }
-        if(floor == ceiling){
+        if(Bisection_Floor == Bisection_Ceiling){
             printf("You entered same values.\n");
             printf("Aborting!!!");
             return 0;
         }
+       
+        
+
     };
     
 
@@ -91,9 +106,12 @@ int main() {
         case 1:
             struct Polynom p1;
             printf("Enter polynom to find roots.\n");
-            printf("First enter base then enter explonent.\n");
+            printf("First enter Polynom_Base then enter explonent.\n");
             Create(&p1);
             Print_Polynom(p1);
+            
+            
+            
             
 
           
