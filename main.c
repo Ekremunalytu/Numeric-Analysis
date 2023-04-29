@@ -40,10 +40,10 @@ void Print_Polynom (struct Polynom p){
     printf("\n");
 };
 
-int Calculate_Polynom_Value(struct Polynom p){
+int Calculate_Polynom_Value(struct Polynom p , int Base_Value){
     int sum = 0;
     for (int i = 0 ; i < p.n ; i++){
-        sum += pow( Polynom_Base , p.Terms[i].Exponent);
+        sum += pow( Base_Value , p.Terms[i].Exponent);
         };
     return sum;
 };
@@ -109,7 +109,21 @@ int main() {
             printf("First enter Polynom_Base then enter explonent.\n");
             Create(&p1);
             Print_Polynom(p1);
-            
+            for(int i = 0 ; i < p1.n; i++){
+                p1.Terms[i].Coefficient = Bisection_Floor;
+            };
+            int Bisection_Floor_value = Calculate_Polynom_Value(p1 , Bisection_Floor);
+            Print_Polynom(p1);
+            Calculate_Polynom_Value(p1 , Bisection_Floor);
+            for(int i = 0 ; i < p1.n; i++){
+                p1.Terms[i].Coefficient = Bisection_Ceiling;
+            };
+            int Bisection_Ceiling_Value = Calculate_Polynom_Value(p1 , Bisection_Ceiling);
+            if(Bisection_Ceiling_Value*Bisection_Floor_value >  0){
+                printf("Root not found");
+                return 0;
+            }
+
             
             
             
