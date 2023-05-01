@@ -2,158 +2,124 @@
 #include <math.h>
 #include <stdlib.h>
 
-struct Term{
-    int Coefficient;
-    int Exponent;
-};
-struct Polynom{
-    int n;
-    struct Term *Terms;
-}; 
-int Polynom_Base;
 
-void Create (struct Polynom *p){
-    int i;
-    printf("Enter Number of Terms.\n");
-    scanf("%d", &p -> n);
-
-    p -> Terms = (struct Term  *) malloc((p->n) * sizeof(struct Term));
-    printf("Enter base: ");
-    scanf("%d" , &Polynom_Base);
-
-
-    printf("Enter Terms\n");
-    for (i = 0  ; i < p -> n ; i++){
-        p -> Terms[i].Coefficient = Polynom_Base;
-        scanf("%d" ,  &p->Terms[i].Exponent);   
+double polinom(double Base, double *Coefficient, int *Exponent, int Degree) {
+    double Sum = 0.0;
+    int Polynom_I;
+    for (Polynom_I = 0; Polynom_I <= Degree; Polynom_I++) {
+        Sum += Coefficient[Polynom_I] * pow(Base, Exponent[Polynom_I]);
     }
+    return Sum;
 }
 
-void Print_Polynom (struct Polynom p){
-    int i;
-    for (i = 0 ; i < p.n ; i++){
-        printf("%d^%d" , p.Terms[i].Coefficient , p.Terms[i].Exponent);
-        if (i + 1 < p.n){
-            printf(" + ");
+double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Coefficient, int *Exponent, int Degree, double Bisection_Tolerance, int Max_Iteration) {
+    double Middle, F_Floor, F_Ceiling, F_Middle;
+    int Iteration = 0;
+
+    F_Floor = polinom(Bisection_Floor, Coefficient, Exponent, Degree);
+    F_Ceiling = polinom(Bisection_Ceiling, Coefficient, Exponent, Degree);
+
+    while ((Bisection_Ceiling-Bisection_Floor) > Bisection_Tolerance && Iteration < Max_Iteration) {
+        Middle = (Bisection_Floor+Bisection_Ceiling) / 2.0;
+        F_Middle = polinom(Middle, Coefficient, Exponent, Degree);
+
+        if (F_Middle == 0.0) {
+            return Middle;
+        } else if (F_Floor * F_Middle < 0.0) {
+            Bisection_Ceiling = Middle;
+            F_Ceiling = F_Middle;
+        } else {
+            Bisection_Floor = Middle;
+            F_Floor = F_Middle;
         }
-    };
-    printf("\n");
-};
 
-int Calculate_Polynom_Value(struct Polynom p , int Base_Value){
-    int sum = 0;
-    for (int i = 0 ; i < p.n ; i++){
-        sum += pow( Base_Value , p.Terms[i].Exponent);
-        };
-    return sum;
-};
+        Iteration++;
+    }
 
-
+    return (Bisection_Floor+Bisection_Ceiling) / 2.0;
+}
 
 
 
 int main() {
-
-
-    
     int operation;
     int in_program = 1;
-    int Bisection_Floor,Bisection_Ceiling;
-    
+    double Bisection_Floor, Bisection_Ceiling, Bisection_Tolerance;
+    int Degree, Max_Iteration;
+    int flag;
 
-    
-
-    
+    double *Coefficient;
+    int *Exponent;
     
     while (in_program){
+        printf("Welcome to numeric analysis program!!!\n");
+        printf("Enter a designed number to make an matematical operation you wished for .\n");
+        printf("Enter 1 to perform bisection method\n");
+        scanf("%d" , &operation);
 
+      switch (operation) {
+        case 1:
+        // Bisection method
+        printf("Enter Polynom Degree: \n");
+        scanf("%d", &Degree);
+        printf("Enter tolerance value\n");
+        scanf("%lf", &Bisection_Tolerance);
 
-    printf("Welcome to numeric analysis program!!!\n");
-    printf("Enter a designed number to make an matematical operation you wished for .\n");
-    printf("Enter 1 to perform bisection method\n");
-    scanf("%d" , &operation);
-
-    if(operation == 1){ //switch case içerisinde scanf çalışmadığı için harici olarak aldım.
         printf("Enter floor and ceiling for bisection method.\n");
-        
         printf("For floor: ");
-        scanf("%d" , &Bisection_Floor);
-        printf("\nFor ceiling: ");
-        scanf("%d" , &Bisection_Ceiling);
-        if(Bisection_Floor > Bisection_Ceiling){
+        scanf("%lf", &Bisection_Floor);
+        printf("For ceiling: ");
+        scanf("%lf", &Bisection_Ceiling);
+
+        if (Bisection_Floor > Bisection_Ceiling) {
             printf("You entered wrong floor and ceiling value !!!!!\n");
             printf("Switching values.\n");
-            int Bisection_Switch_Temp = Bisection_Floor;
+            double Bisection_Switch_Temp = Bisection_Floor;
             Bisection_Floor = Bisection_Ceiling;
             Bisection_Ceiling = Bisection_Switch_Temp;
-            printf("[%d,%d]" ,Bisection_Floor,Bisection_Ceiling);
+            printf("[%lf,%lf]\n", Bisection_Floor, Bisection_Ceiling);
         }
-        if(Bisection_Floor == Bisection_Ceiling){
+
+        if (Bisection_Floor == Bisection_Ceiling) {
             printf("You entered same values.\n");
-            printf("Aborting!!!");
-            return 0;
-        }
-       
-        
-
-    };
-    
-
-    int flag;
-        
-            switch (operation)
-        {
-        case 1:
-            struct Polynom p1;
-            printf("Enter polynom to find roots.\n");
-            printf("First enter Polynom_Base then enter explonent.\n");
-            Create(&p1);
-            Print_Polynom(p1);
-            for(int i = 0 ; i < p1.n; i++){
-                p1.Terms[i].Coefficient = Bisection_Floor;
-            };
-            int Bisection_Floor_value = Calculate_Polynom_Value(p1 , Bisection_Floor);
-            Print_Polynom(p1);
-            Calculate_Polynom_Value(p1 , Bisection_Floor);
-            for(int i = 0 ; i < p1.n; i++){
-                p1.Terms[i].Coefficient = Bisection_Ceiling;
-            };
-            int Bisection_Ceiling_Value = Calculate_Polynom_Value(p1 , Bisection_Ceiling);
-            if(Bisection_Ceiling_Value*Bisection_Floor_value >  0){
-                printf("Root not found");
-                return 0;
-            }
-
-            
-            
-            
-
-          
-
-
-        default:
+            printf("Aborting!!!\n");
             break;
         }
-        
-        printf("Please enter 0 for exit\n");
-        scanf("%d" , &flag);
 
-        
-        
-        if(flag == 0 ){
-            in_program = 0;
+        double *Coefficient = (double*) malloc((Degree+1) * sizeof(double));
+        int *Exponent = (int*) malloc((Degree+1) * sizeof(int));
+
+        for (int Polynom_I = 0; Polynom_I <= Degree; Polynom_I++) {
+            printf("%d. Enter Coefficient: ", Polynom_I);
+            scanf("%lf", &Coefficient[Polynom_I]);
+
+            printf("%d. Enter Exponent: ", Polynom_I);
+            scanf("%d", &Exponent[Polynom_I]);
         }
 
-        };
+        int Max_Iteration;
+        printf("Enter Max iteration\n");
+        scanf("%d", &Max_Iteration);
 
+        double Bisection_Root = Bisection(Bisection_Floor, Bisection_Ceiling, Coefficient, Exponent, Degree, Bisection_Tolerance, Max_Iteration);
 
+        printf("Bisection Root: %lf\n", Bisection_Root);
 
+        free(Coefficient);
+        free(Exponent);
 
+        break;
 
+    default:
+        printf("Invalid operation number. Please enter a valid number.\n");
+        break;
+    }
+    printf("Please enter 0 to exit or any other key to perform another operation.\n");
+    scanf("%d", &flag);
 
+        if (flag == 0) {
+             in_program = 0;
+        }
+    }
 
-
-
-
-    
 }
