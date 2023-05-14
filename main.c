@@ -2,6 +2,21 @@
 #include <math.h>
 #include <stdlib.h>
 
+struct  Polynom{
+    double Coefficient;
+    int Exponent;
+};
+
+
+
+double Structured_Polynom(double base ){
+    struct Polynom p;
+    printf("Enter coefficient: ");
+    scanf("%lf" , &p.Coefficient);
+    printf("Enter exponent");
+    scanf("%d" , &p.Exponent);
+    
+}
 
 
 double Polynom(double Base, double *Polynom_Coefficient, int *Polynom_Exponent, int Polynom_Degree) {
@@ -12,6 +27,8 @@ double Polynom(double Base, double *Polynom_Coefficient, int *Polynom_Exponent, 
     }
     return Sum;
 }
+
+
 
 double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisection_Coefficient, int *Bisection_Exponent, int Bisection_Degree, double Bisection_Tolerance, int Max_Iteration) {
     double Middle;
@@ -44,7 +61,7 @@ double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisec
 
     return (Bisection_Floor+Bisection_Ceiling) / 2.0;
 }
-//test 
+
 double Regula_Falsi(double Regula_Floor, double Regula_Ceiling, double *Regula_Coefficient, int *Regula_Exponent, int Regula_Degree, double Regula_Tolerance, double Regula_Max_Iteration) {
     double Regula_Floor_Value = Polynom(Regula_Floor, Regula_Coefficient, Regula_Exponent, Regula_Degree);
     double Regula_Ceiling_Value = Polynom(Regula_Ceiling, Regula_Coefficient, Regula_Exponent, Regula_Degree);
@@ -247,50 +264,7 @@ int main() {
         printf("Enter 2 to perform regula-falsi method\n");
         printf("Enter 3  to perform gauss-seidel method");
         scanf("%d" , &operation);
-        if(operation == 2){
-            printf("Enter Polynom Degree: \n");
-            scanf("%lf", &Regula_Degree);
-            printf("Enter tolerance value\n");
-            scanf("%lf", &Regula_Tolerance);
-
-            printf("Enter floor and ceiling for bisection method.\n");
-            printf("For floor: ");
-            scanf("%lf", &Regula_Floor);
-            printf("For ceiling: ");
-            scanf("%lf", &Regula_Ceiling);
-
-            if (Regula_Floor > Regula_Ceiling) {
-                printf("You entered wrong floor and ceiling value !!!!!\n");
-                printf("Switching values.\n");
-                double Regula_Switch_Temp = Regula_Floor;
-                Regula_Floor = Regula_Ceiling;
-                Regula_Ceiling = Regula_Switch_Temp;
-                printf("[%lf,%lf]\n", Regula_Floor, Regula_Ceiling);
-            }
-
-            if (Regula_Floor == Regula_Ceiling) {
-                printf("You entered same values.\n");
-                printf("Aborting!!!\n");
-                break;
-            }
-
-            double *Regula_Coefficient = (double*) malloc((Regula_Degree+1) * sizeof(double));
-            int *Regula_Exponent = (int*) malloc((Regula_Degree+1) * sizeof(int));
-            
-
-            int Regula_Max_Iteration;
-            printf("Enter Max iteration\n");
-            scanf("%d", &Regula_Max_Iteration);
-	    printf("%d",Regula_Max_Iteration); // Deneme amaçlı
-
-            for (int i = 0 ; i <= Regula_Degree ; i++){
-                printf("\nEnter coefficient:  ");
-                scanf("%lf", &Regula_Coefficient[i]);
-
-                printf("\nEnter exponent: ");
-                scanf("%d" , &Regula_Exponent[i]);
-		printf("%d",Regula_Exponent[i]); // Deneme amaçlı
-            }
+      
 
         }
 
@@ -415,4 +389,4 @@ int main() {
         }
     }
 
-}
+
