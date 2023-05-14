@@ -44,30 +44,30 @@ double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisec
 
     return (Bisection_Floor+Bisection_Ceiling) / 2.0;
 }
-
-
-double Regula_Falsi(double Regula_Floor , double Regula_Ceiling ,double *Regula_Coefficient , int *Regula_Exponent , int Regula_Degree , double Regula_Tolerance , double Regula_Max_Iteration ){
-    double Regula_Floor_Value = Polynom(Regula_Floor, Regula_Coefficient ,Regula_Exponent , Regula_Degree );
-    double Regula_Ceiling_Value = Polynom(Regula_Ceiling , Regula_Coefficient , Regula_Exponent , Regula_Degree);
-    double Regula_Middle , Regula_Middle_Value;
+//test 
+double Regula_Falsi(double Regula_Floor, double Regula_Ceiling, double *Regula_Coefficient, int *Regula_Exponent, int Regula_Degree, double Regula_Tolerance, double Regula_Max_Iteration) {
+    double Regula_Floor_Value = Polynom(Regula_Floor, Regula_Coefficient, Regula_Exponent, Regula_Degree);
+    double Regula_Ceiling_Value = Polynom(Regula_Ceiling, Regula_Coefficient, Regula_Exponent, Regula_Degree);
+    double Regula_Middle, Regula_Middle_Value;
     int Regula_Iteration = 0;
     double Regula_Error = Regula_Tolerance + 1;
-    
-    if(fabs(Regula_Floor_Value) == 0){
-        printf("Root:  %lf" , Regula_Floor_Value );
-    };
-    if(fabs(Regula_Ceiling_Value) == 0 ){
-        printf("Root:  %lf" , Regula_Ceiling_Value);
-    };
 
-    while(Regula_Error > Regula_Tolerance && Regula_Iteration <  Regula_Max_Iteration){
-        Regula_Middle = (Regula_Ceiling*Regula_Floor_Value - Regula_Floor*Regula_Ceiling_Value)/(Regula_Floor_Value - Regula_Ceiling_Value);
-        Regula_Middle_Value = Polynom(Regula_Middle , Regula_Coefficient , Regula_Exponent , Regula_Degree);
-
-        if(Regula_Middle_Value == 0.0){
-            printf("Root: %lf" , Regula_Middle);
+    while (Regula_Error > Regula_Tolerance && Regula_Iteration <= Regula_Max_Iteration) {
+        if (fabs(Regula_Floor_Value) < 0.0001) {
+            printf("Root: %lf\n", Regula_Floor_Value);
         }
-        if( Regula_Floor_Value * Regula_Middle_Value < 0.0 ){
+        if (fabs(Regula_Ceiling_Value) < 0.0001) {
+            printf("Root: %lf\n", Regula_Ceiling_Value);
+        }
+
+        Regula_Middle = (Regula_Ceiling * Regula_Floor_Value - Regula_Floor * Regula_Ceiling_Value) / (Regula_Floor_Value - Regula_Ceiling_Value);
+        Regula_Middle_Value = Polynom(Regula_Middle, Regula_Coefficient, Regula_Exponent, Regula_Degree);
+
+        if (fabs(Regula_Middle_Value) < 0.0001) {
+            printf("Root: %lf\n", Regula_Middle);
+        }
+
+        if (Regula_Floor_Value * Regula_Middle_Value < 0.0) {
             Regula_Ceiling = Regula_Middle;
             Regula_Ceiling_Value = Regula_Middle_Value;
         }
@@ -75,21 +75,23 @@ double Regula_Falsi(double Regula_Floor , double Regula_Ceiling ,double *Regula_
             Regula_Floor = Regula_Middle;
             Regula_Floor_Value = Regula_Middle_Value;
         }
-        Regula_Error = fabs(Regula_Ceiling - Regula_Floor);
+
+        Regula_Error = fabs(Regula_Ceiling_Value - Regula_Floor_Value);
         Regula_Iteration++;
     }
 
-    if (Regula_Error <= Regula_Tolerance){
+    if (Regula_Error <= Regula_Tolerance) {
         return Regula_Middle;
     }
     else {
         printf("Regula Falsi method failed!!!!\n");
         return 0;
     }
-
-
-
 }
+
+
+
+
 gaussseidel(){
 int i,j,x,y,satir,A,egim,N,currentiteration,maxiteration,iterate;
 double a,b,c,matris[10][10],maxmatris[10][10],value[10][1],temp,temp2,max,epsilon;
@@ -232,7 +234,7 @@ int main() {
     //int Bisection_Max_Iteration;
     double Regula_Floor , Regula_Ceiling , Regula_Tolerance;
     //double Regula_Max_Iteration;
-    double Regula_Degree;
+    int Regula_Degree;
     int flag;
 
   
@@ -242,7 +244,8 @@ int main() {
         printf("Welcome to numeric analysis program!!!\n");
         printf("Enter a designed number to make an matematical operation you wished for .\n");
         printf("Enter 1 to perform bisection method\n");
-        printf("Enter 2 to perform regula-false method\n");
+        printf("Enter 2 to perform regula-falsi method\n");
+        printf("Enter 3  to perform gauss-seidel method");
         scanf("%d" , &operation);
         if(operation == 2){
             printf("Enter Polynom Degree: \n");
@@ -329,6 +332,7 @@ int main() {
 
                 printf("%d. Enter Exponent: ", j);
                 scanf("%d", &Bisection_Exponent[j]);
+               
             }
 
             int Max_Iteration;
@@ -347,7 +351,7 @@ int main() {
         case 2:
         
             printf("Enter Polynom Degree: \n");
-            scanf("%lf", &Regula_Degree);
+            scanf("%d", &Regula_Degree);
             printf("Enter tolerance value\n");
             scanf("%lf", &Regula_Tolerance);
 
@@ -380,18 +384,18 @@ int main() {
             printf("Enter Max iteration\n");
             scanf("%d", &Regula_Max_Iteration);
 
-            for (int i = 1 ; i < Regula_Degree ; i++){
+            for (int i = 0 ; i < Regula_Degree ; i++){
                 printf("\nEnter coefficient:  ");
                 scanf("%lf", &Regula_Coefficient[i]);
 
                 printf("\nEnter exponent: ");
                 scanf("%d" , &Regula_Exponent[i]);
-		            printf("--%d--",i); // Deneme amaçlı
+		            
             }
    
-            double Regula_Root = Regula_Falsi(Regula_Floor , Regula_Ceiling , Regula_Coefficient , Regula_Exponent , Regula_Degree , Regula_Tolerance, Regula_Max_Iteration);
+            //double Regula_Root = Regula_Falsi(Regula_Floor , Regula_Ceiling , Regula_Coefficient , Regula_Exponent , Regula_Degree , Regula_Tolerance, Regula_Max_Iteration);
 
-            printf("Root:  %lf\n---", Regula_Root);
+            //printf("Root:  %lf\n---", Regula_Root);
 
             free(Regula_Coefficient);
             free(Regula_Exponent);
