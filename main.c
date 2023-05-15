@@ -113,7 +113,7 @@ for(i=0;i<N-1;i++){
 		matris[x][j]=matris[i][j];
 	}
 }
-printf("\nbaslangic degerleri: ");
+printf(" \nbaslangic degerleri: ");
 for(i=0;i<N;i++){
 	printf("\n[%d][0]: ",i);
 	scanf("%lf",&value[i][0]);
@@ -222,6 +222,198 @@ getch();
 system("cls");	
 }
 
+//gauss eliminasyon ve bir matrisin tersi metot fonksiyonları eklendi, -sinem
+void gauss_elimination(float userMatrix[MAX_SIZE][MAX_SIZE], int N, float results[MAX_SIZE])
+{
+    int i,j,k;
+    float demoMatrix[MAX_SIZE][MAX_SIZE],temp, answers[N];
+    for(i=0; i<N; i++)
+    {
+        for(j=0; j<N; j++)
+        {
+            demoMatrix[i][j]=userMatrix[i][j];
+        }
+        demoMatrix[i][j]=results[i];
+    }
+
+    for(k=0; k<N; k++)
+    {
+        for(i=k; i<N; i++)
+        {
+            temp=demoMatrix[i][k];
+            for(j=k; j<N+1; j++)
+            {
+                demoMatrix[i][j]=demoMatrix[i][j]/temp;
+            }
+
+        }
+        for(i=k+1; i<N; i++)
+        {
+            for(j=0; j<N+1; j++)
+            {
+                demoMatrix[i][j]=demoMatrix[i][j]-demoMatrix[k][j];
+            }
+        }
+    }
+
+    printf("\nHere is your matrix:\n\n");
+    for(i=0; i<N; i++)
+    {
+        for(j=0; j<N+1; j++)
+        {
+            printf("%f ", demoMatrix[i][j]);
+        }
+        printf("\n");
+    }
+    answers[N-1] = demoMatrix[N-1][N] / demoMatrix[N-1][N-1];
+    for(i=N-2; i>=0; i--)
+    {
+        temp = 0;
+        for(j=N-1; j>=i+1; j--)
+        {
+            temp = temp + (answers[j] * demoMatrix[i][j]);
+        }
+        answers[i] = (demoMatrix[i][N] - temp) / demoMatrix[i][i];
+    }
+
+    printf("The result vektor is: (");
+    for(i=0; i<N-1; i++)
+    {
+        printf("%f, ",answers[i]);
+    }
+    printf("%f)\n", answers[N-1]);
+}
+
+
+
+
+float determinant(float userMatrix[MAX_SIZE][MAX_SIZE], int N)
+{
+    int i,j,k,subI,subJ;
+    float det;
+    det=0;
+    float subMatrix[MAX_SIZE][MAX_SIZE] = {0};
+    if (N == 1){
+        return userMatrix[0][0];
+    }
+    else if (N == 2){
+        return userMatrix[0][0] * userMatrix[1][1] - userMatrix[1][0] * userMatrix[0][1];
+    }
+    else
+    {
+        for (k = 0; k < N; k++){
+            subI = 0;
+            for (i = 1; i < N; i++){
+                subJ = 0;
+                for (j = 0; j < N; j++){
+                    if (j != k){
+                        subMatrix[subI][subJ] = userMatrix[i][j];
+                        subJ++;
+                    }
+                }
+                subI++;
+            }
+            float a = userMatrix[0][k] * determinant(subMatrix, N - 1);
+            if (k % 2 == 1){
+                a *= -1;
+            }
+            det += a;
+        }
+    }
+    return det;
+}
+void inverse_matris_function(float userMatrix[MAX_SIZE][MAX_SIZE], int N)
+{
+    int i,j,k,t;
+    float adjointMatrix[MAX_SIZE][MAX_SIZE], demoMatrix[MAX_SIZE][MAX_SIZE],demoinMatrix[MAX_SIZE][MAX_SIZE];
+    float inverseMatrix[MAX_SIZE][MAX_SIZE];
+
+
+    float det2;
+    //first calculate the determinant of function:
+    det2 = determinant(userMatrix,N);
+    printf("Determinant of matris is: %f \n", det2);
+    //second, we need adjoint matrix:
+    if(det2==0){
+        printf("\nDeterminant of the matris you gave is 0. Inverse matrix can not be calculated.");
+    }
+    else
+    {
+
+        for(i=0; i<N; i++)
+        {
+            for (k = 0; k < N; k++)
+            {
+                if (k != i)
+                {
+                    if (k < i)
+                    {
+                        for (j=0; j<N ; j++)
+                        {
+
+                            demoMatrix[k][j] = userMatrix[k][j];
+                        }
+                    }
+                    else
+                    {
+                        for (j=0; j<N; j++)
+                        {
+
+                            demoMatrix[k-1][j] = userMatrix[k][j];
+                        }
+                    }
+                }
+            }
+            for(j=0; j<N; j++)
+            {
+                for (k = 0; k < N; k++)
+                {
+
+                    if (k != j)
+                    {
+                        if (k < j)
+                        {
+                            for (t=0; t<N-1; t++)
+                            {
+
+                                demoinMatrix[t][k] = demoMatrix[t][k];
+                            }
+                        }
+                        else
+                        {
+                            for(t=0; t<N-1; t++)
+                            {
+
+                                demoinMatrix[t][k-1] = demoMatrix[t][k];
+                            }
+                        }
+                    }
+
+                }
+                adjointMatrix[j][i]= determinant(demoinMatrix, N - 1)* pow(-1, i+j);
+            }
+        }
+        //now, all we need to do is dividing adjoint matrix to determinant:
+        for(i=0; i<N ; i++)
+        {
+            for (j=0; j<N; j++)
+            {
+                inverseMatrix[i][j]=adjointMatrix[i][j]/det2;
+            }
+        }
+        printf("\nHere is your inverse matrix: \n");
+        for(i=0; i<N; i++)
+        {
+            for(j=0; j<N; j++)
+            {
+                printf("%.3f ", inverseMatrix[i][j]);
+            }
+            printf("\n");
+        }
+    }
+}
+//---------------------//
+
 
 
 int main() {
@@ -234,7 +426,10 @@ int main() {
     //double Regula_Max_Iteration;
     double Regula_Degree;
     int flag;
-
+    //eliminasyon ve ters matris için tanımladığım değişkenler: -sinem
+    int i,j,mainmenu,N,k,t;
+    float userMatrix[MAX_SIZE][MAX_SIZE], results[MAX_SIZE];
+    //-------------------//
   
 	
     
@@ -398,7 +593,59 @@ int main() {
             break;
     case 3:
         gaussseidel();
+    break;
+    case 4:
+    printf("Welcome to inverse matris, please enter dimension of the square matrix, you want to get inverse: ");
+            scanf("%d", &N);
+            printf("Please enter the elements of the matrix: \n");
+            for(i=0; i<N; i++){
+                for(j=0; j<N; j++){
+                    printf("Please enter the %d. row and %d. coloumn element of the matrix: ", i+1,j+1);
+                    scanf("%f", &userMatrix[i][j]);
+                }
+            }
+            printf("\nHere is your matrix:\n\n");
+            for(i=0; i<N; i++){
+            	for(j=0; j<N; j++){
+                    printf("%f ", userMatrix[i][j]);
+                }
+                printf("\n");
+            }
 
+            inverse_matris_function(userMatrix, N);
+    break;
+    case 5:
+    printf("Welcome to Gauss elimination method, please enter the number of equations:  ");
+            scanf("%d", &N);
+            printf("Please enter the matrix of the coefficients: \n");
+            for(i=0; i<N; i++)
+            {
+                for(j=0; j<N; j++)
+                {
+                    printf("Please enter the %d. row and %d. coloumn element of the matrix: ", i+1,j+1);
+                    scanf("%f", &userMatrix[i][j]);
+                }
+            }
+            printf("\nHere is your matrix:\n\n");
+            for(i=0; i<N; i++)
+            {
+                for(j=0; j<N; j++)
+                {
+                    printf("%f ", userMatrix[i][j]);
+                }
+                printf("\n");
+            }
+            printf("Please enter the results of equations: ");
+            for(i=0; i<N; i++)
+            {
+                printf("\nPlease enter the result of %d. equation: ",i+1);
+                scanf("%f", &results[i]);
+        	}
+            gauss_elimination(userMatrix, N, results);
+
+            printf("Your operation is done. Do you want to go to main menu? \n(Yes,go to main menu: 1 No,exit the program: 0 ) ");
+            scanf("%d", &mainmenu);
+    break;
     default:
         printf("Invalid operation number. Please enter a valid number.\n");
         break;
