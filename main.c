@@ -461,6 +461,92 @@ Inverse_Matrix(){
 
 }
 
+gausselimination(){
+    int i,j,x,y,N;
+
+    double a,b,c,matris[10][10],Cmatris[10][10],temp;
+
+    printf("Enter square matrix size:  ");
+    scanf("%d",&N);
+
+    for(i=0;i<N;i++){
+        for(j=0;j<N;j++){
+            printf("\n[%d][%d] :",i,j);
+            scanf("%lf",&matris[i][j]);
+        }
+    }
+
+    printf("\n\nEnter answer matrix:");
+
+    for(i=0;i<N;i++){
+        printf("\n[%d][%d]",i,N);
+        scanf("%lf",&matris[i][N]);
+    }
+
+    system("cls");
+
+    printf("Printing extended matrix ........\n");
+
+    for(i=0;i<N;i++){
+
+        printf("\n");
+
+        for(j=0;j<N+1;j++){
+            if(j==N){
+                printf("   |%lf",matris[i][j]);
+            }
+            else printf("	%lf",matris[i][j]);
+        }
+    }
+
+    for(i=0;i<N;i++){
+
+        temp=matris[i][i];
+        matris[i][N]=matris[i][N]/temp;
+
+        for(j=0;j<N;j++){
+            matris[i][j]=matris[i][j]/temp;
+        }
+        for(x=i+1;x<N;x++){
+            temp=matris[x][i]*-1;
+            for(y=0;y<N+1;y++){
+                matris[x][y]=temp*matris[i][y]+matris[x][y];
+            }
+        }
+    }
+
+    printf("\nPrinting result matrix and answer matrix ..........\n");
+
+    for(i=0;i<N;i++){
+        printf("\n");
+        for(j=0;j<N+1;j++){
+            if(j==N){
+                printf("   |%lf",matris[i][j]);
+            }
+            else printf("	%lf",matris[i][j]);
+        }
+    }
+
+    for(i=N-1;i>-1;i--){
+        for(j=N-1;j>-1;j--){
+            if(i!=j){
+                matris[i][N]=matris[i][N]-matris[i][j];
+            }	
+        }
+        for(j=N-1;j>-1;j--){
+            matris[j][i]=matris[j][i]*matris[i][N];
+        }
+        printf("\nX%d:%lf\n",i,matris[i][i]);
+    }
+
+    printf("\nPress any button to continue");
+    getch();
+
+    system("cls");
+
+}
+
+
 
 
 Gauss_Seidel(){
@@ -1840,6 +1926,7 @@ int main() {
         printf("Enter 2 to perform regula-falsi method\n");
         printf("Enter 3 to perform newton ralphson method\n");
         printf("Enter 4 to perform inverse matrix operation\n");
+        printf("Enter 5 to perform Gauss Elimination method\n");
         printf("Enter 6 to perform  Gauss seidel method\n");
         printf("Enter 7 to perform derivation operation\n");
         printf("Enter 8 to perform simpson method\n");
@@ -1959,6 +2046,9 @@ int main() {
             break;
         case 4:
             Inverse_Matrix();
+            break;
+        case 5:
+            gausselimination();
             break;
 
         case 6:
