@@ -23,7 +23,7 @@ double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisec
     F_Floor = Polynom(Bisection_Floor, Bisection_Coefficient, Bisection_Exponent, Bisection_Degree);
     F_Ceiling = Polynom(Bisection_Ceiling, Bisection_Coefficient, Bisection_Exponent, Bisection_Degree);
 
-    printf("%lf",F_Ceiling); // Deneme amaçlı
+    
 
     while ((Bisection_Ceiling-Bisection_Floor) > Bisection_Tolerance && Iteration < Max_Iteration) {
         Middle = (Bisection_Floor+Bisection_Ceiling) / 2.0;
@@ -92,19 +92,21 @@ double Regula_Falsi(double Regula_Floor , double Regula_Ceiling ,double *Regula_
 }
 
 Newton_Ralphson(){
+
 	const double PI=3.14159265;
+    
 	int Trigonometric_Value,Inverse_Trigonometric_Value,Logaritmic_Value;
     int Exponential_Value,i,j,N,Stop_Criteria,Max_Iteration,Current_Iteration,Iterate;
 
-	double x,Temp,ttrfncoef[10],ttrbase[10],ttrxcoef[10],ttrxexp[10],ttrfnexp[10];
+	double x,Temp,itrfncoeff[10],itrbase[10],itrxcoeff[10],itrxexp[10],itrfnexp[10];
 	double trfncoef[10],trbase[10],trxcoef[10],trxexp[10],trfnexp[10],lgfncoef[10];
-	double lgbase[10],lgxcoef[10],lgxexp[10],lgfnexp[10],usfncoef[10],usbase[10];
-	double usxcoef[10],usxexp[10],usfnexp[10],xn,xnew,Sum,xcoef[10],xexp[10],fxn,f_derivate_xn,Epsilon;
+	double lgbase[10],lgxcoef[10],lgxexp[10],lgfnexp[10],exfncoef[10],exbase[10];
+	double excoeff[10],exexp[10],exfexp[10],xn,xnew,Sum,xcoef[10],xexp[10],fxn,f_derivate_xn,Epsilon;
 
 
 	system("cls");
 
-	printf("How many polynomal value are you going to use?\n");
+	printf("\nHow many polynomal value are you going to use?\n");
 	scanf("%d",&N);
 
 	for(i=0;i<N;i++){
@@ -118,25 +120,25 @@ Newton_Ralphson(){
 	printf("\nHow many exponential value are you going to use?\n");
 	scanf("%d",&Exponential_Value);
 
-	printf("usfncoef*(usbase^(usxcoef*x^usxexp))^usfnexp");
+	printf("exfncoef*(exbase^(excoeff*x^exexp))^exfexp");
 
 	for(i=0;i<Exponential_Value;i++){
 		printf("\n\n%d. Element",i+1);
 
-		printf("\nusfncoef: ");
-		scanf("%lf",&usfncoef[i]);
+		printf("\nexfncoef: ");
+		scanf("%lf",&exfncoef[i]);
 
-		printf("\nusbase: ");
-		scanf("%lf",&usbase[i]);
+		printf("\nexbase: ");
+		scanf("%lf",&exbase[i]);
 
-		printf("\nusxcoef: ");
-		scanf("%lf",&usxcoef[i]);
+		printf("\nexxcoef: ");
+		scanf("%lf",&excoeff[i]);
 
-		printf("\nusxexp: ");
-		scanf("%lf",&usxexp[i]);
+		printf("\nexxexp: ");
+		scanf("%lf",&exexp[i]);
 
-		printf("\nusfnexp: ");
-		scanf("%lf",&usfnexp[i]);
+		printf("\nexfnexp: ");
+		scanf("%lf",&exfexp[i]);
 
 	}
 	printf("\nHow many logarithmic value are you going to use?\n");
@@ -169,7 +171,7 @@ Newton_Ralphson(){
 	printf("trfncoef*(trbase(trxcoef*x^trxexp))^trfnexp");
 
 	for(i=0;i<Trigonometric_Value;i++){
-		printf("\n\n%d. Elements trigonomtric base (trbase): (1)sin  (2)cos  (3)tan  (4)cot: ",i+1);
+		printf("\n\n%d. Element trigonomtric base (trbase): (1)sin  (2)cos  (3)tan  (4)cot: ",i+1);
 		scanf("%lf",&trbase[i]);
 
 		printf("\ntrfncoef: ");
@@ -185,26 +187,26 @@ Newton_Ralphson(){
 		scanf("%lf",&trfnexp[i]);
 
 	}
-	printf("\nHow many inverse trigonometric value are you going to use?");
+	printf("\nHow many inverse trigonometric value are you going to use?\n");
 	scanf("%d",&Inverse_Trigonometric_Value);
 
-	printf("ttrfncoef*(ttrbase(ttrxcoef*x^ttrxexp))^ttrfnexp");
+	printf("itrfncoeff*(itrbase(itrxcoeff*x^itrxexp))^itrfnexp");
 
 	for(i=0;i<Inverse_Trigonometric_Value;i++){
-		printf("\n\n%d. Elements inverse trigonometric base(ttrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
-		scanf("%lf",&ttrbase[i]);
+		printf("\n\n%d. Element inverse trigonometric base(itrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
+		scanf("%lf",&itrbase[i]);
 
-		printf("\nttrfncoef: ");
-		scanf("%lf",&ttrfncoef[i]);
+		printf("\nitrfncoef: ");
+		scanf("%lf",&itrfncoeff[i]);
 
-		printf("\nttrxcoef: ");
-		scanf("%lf",&ttrxcoef[i]);
+		printf("\nitrxcoef: ");
+		scanf("%lf",&itrxcoeff[i]);
 
-		printf("\nttrxexp: ");
-		scanf("%lf",&ttrxexp[i]);
+		printf("\nitrxexp: ");
+		scanf("%lf",&itrxexp[i]);
 
-		printf("\nttrfnexp: ");
-		scanf("%lf",&ttrfnexp[i]);
+		printf("\nitrfnexp: ");
+		scanf("%lf",&itrfnexp[i]);
 		
 	}
 	system("cls");
@@ -215,7 +217,7 @@ Newton_Ralphson(){
 	}
 		
 	for(i=0;i<Exponential_Value;i++){
-		printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",usfncoef[i],usbase[i],usxcoef[i],usxexp[i],usfnexp[i]);
+		printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",exfncoef[i],exbase[i],excoeff[i],exexp[i],exfexp[i]);
 	}
 	for(i=0;i<Logaritmic_Value;i++){
 		printf("+(%lf*(log(%lf*x^%lf)/log%lf)^%lf)",lgfncoef[i],lgxcoef[i],lgxexp[i],lgbase[i],lgfnexp[i]);
@@ -235,17 +237,17 @@ Newton_Ralphson(){
 		}
 	}
 	for(i=0;i<Inverse_Trigonometric_Value;i++){
-		if(ttrbase[i]==1){
-			printf("+%lf*(arcsin(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+		if(itrbase[i]==1){
+			printf("+%lf*(arcsin(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
 		}
-		else if(ttrbase[i]==2){
-			printf("+%lf*(arccos(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+		else if(itrbase[i]==2){
+			printf("+%lf*(arccos(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
 		}
-		else if(ttrbase[i]==3){
-			printf("+%lf*(arctan(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+		else if(itrbase[i]==3){
+			printf("+%lf*(arctan(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
 		}
 		else{
-		printf("+%lf*(arccot(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+		printf("+%lf*(arccot(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
 		}
 	}
 
@@ -268,12 +270,14 @@ Newton_Ralphson(){
 		Sum=0;
 		x=xn;
 
+        //Calculating the function value
+
 		for(i=0;i<N;i++){
 			Sum=Sum+xcoef[i]*pow(x,xexp[i]);
 		}
 		for(i=0;i<Exponential_Value;i++){
-			Temp=usxcoef[i]*pow(x,usxexp[i]);
-			Sum=Sum+usfncoef[i]*pow(pow(usbase[i],Temp),usfnexp[i]);
+			Temp=excoeff[i]*pow(x,exexp[i]);
+			Sum=Sum+exfncoef[i]*pow(pow(exbase[i],Temp),exfexp[i]);
 		}
 		for(i=0;i<Logaritmic_Value;i++){
 			Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -294,17 +298,17 @@ Newton_Ralphson(){
 		}
 
 		for(i=0;i<Inverse_Trigonometric_Value;i++){
-			if(ttrbase[i]==1){
-				Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+			if(itrbase[i]==1){
+				Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
 			}
-			else if(ttrbase[i]==2){
-				Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+			else if(itrbase[i]==2){
+				Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
 			}
-			else if(ttrbase[i]==3){
-				Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+			else if(itrbase[i]==3){
+				Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
 			}
 			else{
-				Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+				Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
 			}
 		}
 		fxn=Sum;
@@ -321,7 +325,7 @@ Newton_Ralphson(){
 		}
 		for(i=0;i<Exponential_Value;i++){
 			if(xexp[i]>0){
-				Sum=Sum+(usfncoef[i])*(pow(usbase[i],usxcoef[i]*pow(x,usxexp[i])))*(usxcoef[i]*usxexp[i]*pow(x,usxexp[i]-1))*(log(usbase[i]))*(usfnexp[i])*(pow(pow(usbase[i],usxcoef[i]*pow(x,usxexp[i])),usfnexp[i]-1));
+				Sum=Sum+(exfncoef[i])*(pow(exbase[i],excoeff[i]*pow(x,exexp[i])))*(excoeff[i]*exexp[i]*pow(x,exexp[i]-1))*(log(exbase[i]))*(exfexp[i])*(pow(pow(exbase[i],excoeff[i]*pow(x,exexp[i])),exfexp[i]-1));
 			}
 		}
 		for(i=0;i<Logaritmic_Value;i++){
@@ -347,24 +351,24 @@ Newton_Ralphson(){
 		}
 		for(i=0;i<Inverse_Trigonometric_Value;i++){
 			if(xexp[i]>0){
-				if(ttrbase[i]==1){
-					Sum=Sum+((ttrfncoef[i])*(ttrfnexp[i])*(ttrxexp[i])*(ttrxcoef[i])*(pow(x,ttrxexp[i]-1)))*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]-1))/(sqrt(1-pow(ttrxcoef[i]*pow(x,ttrxexp[i]),2)));
+				if(itrbase[i]==1){
+					Sum=Sum+((itrfncoeff[i])*(itrfnexp[i])*(itrxexp[i])*(itrxcoeff[i])*(pow(x,itrxexp[i]-1)))*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]-1))/(sqrt(1-pow(itrxcoeff[i]*pow(x,itrxexp[i]),2)));
 				}
-				else if(ttrbase[i]==2){
-					Sum=Sum+((ttrfncoef[i])*(ttrfnexp[i])*(ttrxexp[i])*(ttrxcoef[i])*(pow(x,ttrxexp[i]-1)))*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]-1))/(sqrt(1-pow(ttrxcoef[i]*pow(x,ttrxexp[i]),2)))*-1;
+				else if(itrbase[i]==2){
+					Sum=Sum+((itrfncoeff[i])*(itrfnexp[i])*(itrxexp[i])*(itrxcoeff[i])*(pow(x,itrxexp[i]-1)))*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]-1))/(sqrt(1-pow(itrxcoeff[i]*pow(x,itrxexp[i]),2)))*-1;
 				}
-				else if(ttrbase[i]==3){
-					Sum=Sum+((ttrfncoef[i])*(ttrfnexp[i])*(ttrxexp[i])*(ttrxcoef[i])*(pow(x,ttrxexp[i]-1)))*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]-1))/(1+pow(ttrxcoef[i]*pow(x,ttrxexp[i]),2));
+				else if(itrbase[i]==3){
+					Sum=Sum+((itrfncoeff[i])*(itrfnexp[i])*(itrxexp[i])*(itrxcoeff[i])*(pow(x,itrxexp[i]-1)))*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]-1))/(1+pow(itrxcoeff[i]*pow(x,itrxexp[i]),2));
 				}
 				else{
-					Sum=Sum+((ttrfncoef[i])*(ttrfnexp[i])*(ttrxexp[i])*(ttrxcoef[i])*(pow(x,ttrxexp[i]-1)))*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]-1))/(1+pow(ttrxcoef[i]*pow(x,ttrxexp[i]),2))*-1;
+					Sum=Sum+((itrfncoeff[i])*(itrfnexp[i])*(itrxexp[i])*(itrxcoeff[i])*(pow(x,itrxexp[i]-1)))*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]-1))/(1+pow(itrxcoeff[i]*pow(x,itrxexp[i]),2))*-1;
 				}
 			}
 		}
 
 		f_derivate_xn=Sum;
 
-		printf("\nfturev(xn): %lf",f_derivate_xn);
+		printf("\nfderivate(xn): %lf",f_derivate_xn);
 
 		Sum=0;
 		xnew=xn-(fxn/f_derivate_xn);
@@ -461,7 +465,7 @@ Inverse_Matrix(){
 
 }
 
-gausselimination(){
+Gauss_Elimination(){
     int i,j,x,y,N;
 
     double a,b,c,matris[10][10],Cmatris[10][10],temp;
@@ -728,19 +732,19 @@ Derivation(){
     int Trigonometric_Values,Inverse_Trigonometric_Values;
     int Logaritmic_Values,Exponential_Values,i,j,N,Operation_Type;
 
-    double a,x,h,temp,ttrfncoef[10],ttrbase[10],ttrxcoef[10],ttrxexp[10];
-    double ttrfnexp[10],trfncoef[10],trbase[10],trxcoef[10],trxexp[10];
+    double a,x,h,temp,itrfncoeff[10],itrbase[10],itrxcoeff[10],itrxexp[10];
+    double itrfnexp[10],trfncoef[10],trbase[10],trxcoef[10],trxexp[10];
     double trfnexp[10],lgfncoef[10],lgbase[10],lgxcoef[10],lgxexp[10];
-    double lgfnexp[10],usfncoef[10],usbase[10],usxcoef[10],usxexp[10];
-    double usfnexp[10],xcoef[10],xexp[10],fx,fh,Fx_negative_h,Fx_positive_h,Result,Sum;
+    double lgfnexp[10],exfncoeff[10],exbase[10],exxcoeff[10],exxexp[10];
+    double exfnexp[10],xcoef[10],xexp[10],fx,fh,Fx_negative_h,Fx_positive_h,Result,Sum;
 
     system("cls");
 
-    printf("\nHow many polynomal value are you going to use? \n");
+    printf("\nHow many polynomal value are you going to use?\n");
     scanf("%d",&N);
 
     for(i=0;i<N;i++){
-        printf("\n%d. Polynom coefficienti\n",i+1);
+        printf("\n%d. Polynom coefficient\n",i+1);
         scanf("%lf",&xcoef[i]);
 
         printf("%d. Polynom exponent\n",i+1);
@@ -748,30 +752,30 @@ Derivation(){
 
     }
 
-    printf("\nHow many exponential value are you going to use? ");
+    printf("\nHow many exponential value are you going to use?\n");
     scanf("%d",&Exponential_Values);
 
-    printf("usfncoef*(usbase^(usxcoef*x^usxexp))^usfnexp");
+    printf("exfncoeff*(exbase^(exxcoeff*x^exxexp))^exfnexp");
     for(i=0;i<Exponential_Values;i++){
         printf("\n\n%d. Element",i+1);
 
-        printf("\nusfncoef: ");
-        scanf("%lf",&usfncoef[i]);
+        printf("\nexfncoef: ");
+        scanf("%lf",&exfncoeff[i]);
 
-        printf("\nusbase: ");
-        scanf("%lf",&usbase[i]);
+        printf("\nexbase: ");
+        scanf("%lf",&exbase[i]);
 
-        printf("\nusxcoef: ");
-        scanf("%lf",&usxcoef[i]);
+        printf("\nexxcoef: ");
+        scanf("%lf",&exxcoeff[i]);
 
-        printf("\nusxexp: ");
-        scanf("%lf",&usxexp[i]);
+        printf("\nexxexp: ");
+        scanf("%lf",&exxexp[i]);
 
-        printf("\nusfnexp: ");
-        scanf("%lf",&usfnexp[i]);
+        printf("\nexfnexp: ");
+        scanf("%lf",&exfnexp[i]);
 
     }
-    printf("\nHow many logarithmic value are you going to use?");
+    printf("\nHow many logarithmic value are you going to use?\n");
     scanf("%d",&Logaritmic_Values);
 
     printf("lgfncoef*(log_(logbase)(lgcoef*x^lgxexp)^lgfnexp");
@@ -795,7 +799,7 @@ Derivation(){
         scanf("%lf",&lgfnexp[i]);
 
     }
-    printf("\nHow many trigonometric value are you going to use?");
+    printf("\nHow many trigonometric value are you going to use?\n");
     scanf("%d",&Trigonometric_Values);
 
     printf("trfncoef*(trbase(trxcoef*x^trxexp))^trfnexp");
@@ -818,26 +822,26 @@ Derivation(){
 
     }
 
-    printf("\nHow many inverse trigonometric value are you going to use?");
+    printf("\nHow many inverse trigonometric value are you going to use?\n");
     scanf("%d",&Inverse_Trigonometric_Values);
 
-    printf("ttrfncoef*(ttrbase(ttrxcoef*x^ttrxexp))^ttrfnexp");
+    printf("itrfncoeff*(itrbase(itrxcoeff*x^itrxexp))^itrfnexp");
 
     for(i=0;i<Inverse_Trigonometric_Values;i++){
-        printf("\n\n%d.Element trigonometric base(ttrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
-        scanf("%lf",&ttrbase[i]);
+        printf("\n\n%d.Element trigonometric base(itrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
+        scanf("%lf",&itrbase[i]);
 
-        printf("\nttrfncoef: ");
-        scanf("%lf",&ttrfncoef[i]);
+        printf("\nitrfncoef: ");
+        scanf("%lf",&itrfncoeff[i]);
 
-        printf("\nttrxcoef: ");
-        scanf("%lf",&ttrxcoef[i]);
+        printf("\nitrxcoef: ");
+        scanf("%lf",&itrxcoeff[i]);
 
-        printf("\nttrxexp: ");
-        scanf("%lf",&ttrxexp[i]);
+        printf("\nitrxexp: ");
+        scanf("%lf",&itrxexp[i]);
 
-        printf("\nttrfnexp: ");
-        scanf("%lf",&ttrfnexp[i]);
+        printf("\nitrfnexp: ");
+        scanf("%lf",&itrfnexp[i]);
 
     }
 
@@ -848,7 +852,7 @@ Derivation(){
         printf("+(%lf*x^%lf)",xcoef[i],xexp[i]);
     }
     for(i=0;i<Exponential_Values;i++){
-        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",usfncoef[i],usbase[i],usxcoef[i],usxexp[i],usfnexp[i]);
+        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",exfncoeff[i],exbase[i],exxcoeff[i],exxexp[i],exfnexp[i]);
     }
     for(i=0;i<Logaritmic_Values;i++){
         printf("+(%lf*(log(%lf*x^%lf)/log%lf)^%lf)",lgfncoef[i],lgxcoef[i],lgxexp[i],lgbase[i],lgfnexp[i]);
@@ -868,17 +872,17 @@ Derivation(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Values;i++){
-        if(ttrbase[i]==1){
-        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        if(itrbase[i]==1){
+        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==2){
-        printf("+%lf*(arccos(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==2){
+        printf("+%lf*(arccos(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==3){
-        printf("+%lf*(arctan(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==3){
+        printf("+%lf*(arctan(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
         else{
-        printf("+%lf*(arccot(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        printf("+%lf*(arccot(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
     }
 
@@ -910,8 +914,8 @@ Derivation(){
         Sum=Sum+xcoef[i]*pow(x,xexp[i]);
     }
     for(i=0;i<Exponential_Values;i++){
-        temp=usxcoef[i]*pow(x,usxexp[i]);
-        Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+        temp=exxcoeff[i]*pow(x,exxexp[i]);
+        Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
     }
     for(i=0;i<Logaritmic_Values;i++){		
         Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -931,17 +935,17 @@ Derivation(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Values;i++){
-        if(ttrbase[i]==1){
-            Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        if(itrbase[i]==1){
+            Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==2){
-            Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==2){
+            Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==3){
-            Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==3){
+            Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
         else{
-            Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
     }
 
@@ -953,8 +957,8 @@ Derivation(){
         Sum=Sum+xcoef[i]*pow(x,xexp[i]);
     }
     for(i=0;i<Exponential_Values;i++){
-        temp=usxcoef[i]*pow(x,usxexp[i]);
-        Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+        temp=exxcoeff[i]*pow(x,exxexp[i]);
+        Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
     }
     for(i=0;i<Logaritmic_Values;i++){		
         Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -974,17 +978,17 @@ Derivation(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Values;i++){
-        if(ttrbase[i]==1){
-            Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        if(itrbase[i]==1){
+            Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==2){
-            Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==2){
+            Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==3){
-            Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==3){
+            Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
         else{
-            Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
     }
     
@@ -996,8 +1000,8 @@ Derivation(){
         Sum=Sum+xcoef[i]*pow(x,xexp[i]);
     }
     for(i=0;i<Exponential_Values;i++){
-        temp=usxcoef[i]*pow(x,usxexp[i]);
-        Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+        temp=exxcoeff[i]*pow(x,exxexp[i]);
+        Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
     }
     for(i=0;i<Logaritmic_Values;i++){		
         Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1017,17 +1021,17 @@ Derivation(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Values;i++){
-        if(ttrbase[i]==1){
-            Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        if(itrbase[i]==1){
+            Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==2){
-            Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==2){
+            Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
-        else if(ttrbase[i]==3){
-            Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+        else if(itrbase[i]==3){
+            Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
         else{
-            Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
         }
     }
 
@@ -1052,10 +1056,10 @@ Derivation(){
 Simpson(){
     const double PI=3.14159265;
     int Trigonometric_Value,Inverse_Trigonometric_Value,Logarithmic_Value,Exponential_Value,i,j,z,y,n,N,Operation_Value;
-    double x,ttrfncoef[10],ttrbase[10],ttrxcoef[10],ttrxexp[10],ttrfnexp[10];
+    double x,itrfncoeff[10],itrbase[10],itrxcoeff[10],itrxexp[10],itrfnexp[10];
     double trfncoef[10],trbase[10],trxcoef[10],trxexp[10],trfnexp[10],lgfncoef[10];
-    double lgbase[10],lgxcoef[10],lgxexp[10],lgfnexp[10],usfncoef[10],usbase[10];
-    double usxcoef[10],usxexp[10],usfnexp[10],xcoef[10],xexp[10],Main_Sum;
+    double lgbase[10],lgxcoef[10],lgxexp[10],lgfnexp[10],exfncoeff[10],exbase[10];
+    double exxcoeff[10],exxexp[10],exfnexp[10],xcoef[10],xexp[10],Main_Sum;
     double Sum,temp,F_Start,F_End,F_middle,fx1,fx2,temp2,Start,Medium,End,x1,x2;
 
     system("cls");
@@ -1074,25 +1078,25 @@ Simpson(){
     printf("\nHow many exponential value are you going to use?\n");
     scanf("%d",&Exponential_Value);
 
-    printf("usfncoef*(usbase^(usxcoef*x^usxexp))^usfnexp");
+    printf("exfncoeff*(exbase^(exxcoeff*x^exxexp))^exfnexp");
 
     for(i=0;i<Exponential_Value;i++){
         printf("\n\n%d. Element",i+1);
 
-        printf("\nusfncoef: ");
-        scanf("%lf",&usfncoef[i]);
+        printf("\nexfncoef: ");
+        scanf("%lf",&exfncoeff[i]);
 
-        printf("\nusbase: ");
-        scanf("%lf",&usbase[i]);
+        printf("\nexbase: ");
+        scanf("%lf",&exbase[i]);
 
-        printf("\nusxcoef: ");
-        scanf("%lf",&usxcoef[i]);
+        printf("\nexxcoef: ");
+        scanf("%lf",&exxcoeff[i]);
 
-        printf("\nusxexp: ");
-        scanf("%lf",&usxexp[i]);
+        printf("\nexxexp: ");
+        scanf("%lf",&exxexp[i]);
 
-        printf("\nusfnexp: ");
-        scanf("%lf",&usfnexp[i]);
+        printf("\nexfnexp: ");
+        scanf("%lf",&exfnexp[i]);
 
     }
 
@@ -1145,24 +1149,24 @@ Simpson(){
     printf("\nHow many inverse trigonometric  value are you going to use?\n");
     scanf("%d",&Inverse_Trigonometric_Value);
 
-    printf("ttrfncoef*(ttrbase(ttrxcoef*x^ttrxexp))^ttrfnexp");
+    printf("itrfncoeff*(itrbase(itrxcoeff*x^itrxexp))^itrfnexp");
 
     for(i=0;i<Inverse_Trigonometric_Value;i++){
 
-        printf("\n\n%d. Element trigonometric base (ttrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
-        scanf("%lf",&ttrbase[i]);
+        printf("\n\n%d. Element trigonometric base (itrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
+        scanf("%lf",&itrbase[i]);
 
-        printf("\nttrfncoef: ");
-        scanf("%lf",&ttrfncoef[i]);
+        printf("\nitrfncoef: ");
+        scanf("%lf",&itrfncoeff[i]);
         
-        printf("\nttrxcoef: ");
-        scanf("%lf",&ttrxcoef[i]);
+        printf("\nitrxcoef: ");
+        scanf("%lf",&itrxcoeff[i]);
 
-        printf("\nttrxexp: ");
-        scanf("%lf",&ttrxexp[i]);
+        printf("\nitrxexp: ");
+        scanf("%lf",&itrxexp[i]);
 
-        printf("\nttrfnexp: ");
-        scanf("%lf",&ttrfnexp[i]);
+        printf("\nitrfnexp: ");
+        scanf("%lf",&itrfnexp[i]);
 
     }
 
@@ -1173,7 +1177,7 @@ Simpson(){
         printf("+(%lf*x^%lf)",xcoef[i],xexp[i]);
     }
     for(i=0;i<Exponential_Value;i++){
-        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",usfncoef[i],usbase[i],usxcoef[i],usxexp[i],usfnexp[i]);
+        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",exfncoeff[i],exbase[i],exxcoeff[i],exxexp[i],exfnexp[i]);
     }
     for(i=0;i<Logarithmic_Value;i++){
         printf("+(%lf*(log(%lf*x^%lf)/log%lf)^%lf)",lgfncoef[i],lgxcoef[i],lgxexp[i],lgbase[i],lgfnexp[i]);
@@ -1193,27 +1197,27 @@ Simpson(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Value;i++){
-        if(ttrbase[i]==1){
-        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        if(itrbase[i]==1){
+        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==2){
-        printf("+%lf*(arccos(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==2){
+        printf("+%lf*(arccos(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==3){
-        printf("+%lf*(arctan(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==3){
+        printf("+%lf*(arctan(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
         else{
-        printf("+%lf*(arccot(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        printf("+%lf*(arccot(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
     }
     
     printf("\nSimpson's Rule 1/3: 1\nSimpson's Rule 3/8: 2\nChoice:");
     scanf("%d",&Operation_Value);
 
-    printf("\nstart: ");
+    printf("\nStart: ");
     scanf("%lf",&Start);
 
-    printf("\nend: ");
+    printf("\nEnd: ");
     scanf("%lf",&End);
 
     printf("\nn: ");
@@ -1236,8 +1240,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1257,17 +1261,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1279,8 +1283,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1300,17 +1304,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1322,8 +1326,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1343,17 +1347,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1377,8 +1381,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1398,17 +1402,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1420,8 +1424,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1441,17 +1445,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1465,8 +1469,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1486,17 +1490,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1509,8 +1513,8 @@ Simpson(){
                 Sum=Sum+xcoef[i]*pow(x,xexp[i]);
             }
             for(i=0;i<Exponential_Value;i++){
-                temp=usxcoef[i]*pow(x,usxexp[i]);
-                Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+                temp=exxcoeff[i]*pow(x,exxexp[i]);
+                Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
             }
             for(i=0;i<Logarithmic_Value;i++){
                 Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1530,17 +1534,17 @@ Simpson(){
                 }
             }
             for(i=0;i<Inverse_Trigonometric_Value;i++){
-                if(ttrbase[i]==1){
-                    Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                if(itrbase[i]==1){
+                    Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==2){
-                    Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==2){
+                    Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
-                else if(ttrbase[i]==3){
-                    Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                else if(itrbase[i]==3){
+                    Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
                 else{
-                    Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                    Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
                 }
             }
 
@@ -1562,11 +1566,11 @@ Trapezoid(){
 
     int Trigonometric_Value,Inverse_Trigonometric_Value,Logarithmic_Value,us,i,j,z,y,n,N;
 
-    double x,ttrfncoef[10],ttrbase[10],ttrxcoef[10],ttrxexp[10];
-    double ttrfnexp[10],trfncoef[10],trbase[10],trxcoef[10],trxexp[10];
+    double x,itrfncoeff[10],itrbase[10],itrxcoeff[10],itrxexp[10];
+    double itrfnexp[10],trfncoef[10],trbase[10],trxcoef[10],trxexp[10];
     double trfnexp[10],lgfncoef[10],lgbase[10],lgxcoef[10],lgxexp[10];
-    double lgfnexp[10],usfncoef[10],usbase[10],usxcoef[10],usxexp[10];
-    double usfnexp[10],Main_Sum,Sum,temp,xcoef[10],xexp[10],F_Start,F_End,Start,End;
+    double lgfnexp[10],exfncoeff[10],exbase[10],exxcoeff[10],exxexp[10];
+    double exfnexp[10],Main_Sum,Sum,temp,xcoef[10],xexp[10],F_Start,F_End,Start,End;
 
     system("cls");
     
@@ -1583,25 +1587,25 @@ Trapezoid(){
     printf("\nHow many exponential value are you going to use? \n");
     scanf("%d",&us);
 
-    printf("usfncoef*(usbase^(usxcoef*x^usxexp))^usfnexp");
+    printf("exfncoeff*(exbase^(exxcoeff*x^exxexp))^exfnexp");
 
     for(i=0;i<us;i++){
         printf("\n\n%d. Element",i+1);
 
-        printf("\nusfncoef: ");
-        scanf("%lf",&usfncoef[i]);
+        printf("\nexfncoef: ");
+        scanf("%lf",&exfncoeff[i]);
 
-        printf("\nusbase: ");
-        scanf("%lf",&usbase[i]);
+        printf("\nexbase: ");
+        scanf("%lf",&exbase[i]);
 
-        printf("\nusxcoef: ");
-        scanf("%lf",&usxcoef[i]);
+        printf("\nexxcoef: ");
+        scanf("%lf",&exxcoeff[i]);
 
-        printf("\nusxexp: ");
-        scanf("%lf",&usxexp[i]);
+        printf("\nexxexp: ");
+        scanf("%lf",&exxexp[i]);
 
-        printf("\nusfnexp: ");
-        scanf("%lf",&usfnexp[i]);
+        printf("\nexfnexp: ");
+        scanf("%lf",&exfnexp[i]);
 
     }
 
@@ -1657,24 +1661,24 @@ Trapezoid(){
     printf("\nHow many inverse trigonometric  value are you going to use? \n");
     scanf("%d",&Inverse_Trigonometric_Value);
 
-    printf("ttrfncoef*(ttrbase(ttrxcoef*x^ttrxexp))^ttrfnexp");
+    printf("itrfncoeff*(itrbase(itrxcoeff*x^itrxexp))^itrfnexp");
 
     for(i=0;i<Inverse_Trigonometric_Value;i++){
 
-        printf("\n\n%d. Element trigonometric base (ttrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
-        scanf("%lf",&ttrbase[i]);
+        printf("\n\n%d. Element trigonometric base (itrbase): (1)arcsin  (2)arccos  (3)arctan  (4)arccot: ",i+1);
+        scanf("%lf",&itrbase[i]);
 
-        printf("\nttrfncoef: ");
-        scanf("%lf",&ttrfncoef[i]);
+        printf("\nitrfncoef: ");
+        scanf("%lf",&itrfncoeff[i]);
 
-        printf("\nttrxcoef: ");
-        scanf("%lf",&ttrxcoef[i]);
+        printf("\nitrxcoef: ");
+        scanf("%lf",&itrxcoeff[i]);
 
-        printf("\nttrxexp: ");
-        scanf("%lf",&ttrxexp[i]);
+        printf("\nitrxexp: ");
+        scanf("%lf",&itrxexp[i]);
 
-        printf("\nttrfnexp: ");
-        scanf("%lf",&ttrfnexp[i]);
+        printf("\nitrfnexp: ");
+        scanf("%lf",&itrfnexp[i]);
 
     }
 
@@ -1686,7 +1690,7 @@ Trapezoid(){
         printf("+(%lf*x^%lf)",xcoef[i],xexp[i]);
     }
     for(i=0;i<us;i++){
-        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",usfncoef[i],usbase[i],usxcoef[i],usxexp[i],usfnexp[i]);
+        printf("+(%lf*(%lf^(%lf*x^%lf))^%lf)",exfncoeff[i],exbase[i],exxcoeff[i],exxexp[i],exfnexp[i]);
     }
     for(i=0;i<Logarithmic_Value;i++){
         printf("+(%lf*(log(%lf*x^%lf)/log%lf)^%lf)",lgfncoef[i],lgxcoef[i],lgxexp[i],lgbase[i],lgfnexp[i]);
@@ -1706,17 +1710,17 @@ Trapezoid(){
         }
     }
     for(i=0;i<Inverse_Trigonometric_Value;i++){
-        if(ttrbase[i]==1){
-        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        if(itrbase[i]==1){
+        printf("+%lf*(arcsin(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==2){
-        printf("+%lf*(arccos(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==2){
+        printf("+%lf*(arccos(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
-        else if(ttrbase[i]==3){
-        printf("+%lf*(arctan(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        else if(itrbase[i]==3){
+        printf("+%lf*(arctan(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
         else{
-        printf("+%lf*(arccot(%lf*x^%lf))^%lf",ttrfncoef[i],ttrxcoef[i],ttrxexp[i],ttrfnexp[i]);
+        printf("+%lf*(arccot(%lf*x^%lf))^%lf",itrfncoeff[i],itrxcoeff[i],itrxexp[i],itrfnexp[i]);
         }
     }
 
@@ -1740,8 +1744,8 @@ Trapezoid(){
             Sum=Sum+xcoef[i]*pow(x,xexp[i]);
         }
         for(i=0;i<us;i++){
-            temp=usxcoef[i]*pow(x,usxexp[i]);
-            Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+            temp=exxcoeff[i]*pow(x,exxexp[i]);
+            Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
         }
         for(i=0;i<Logarithmic_Value;i++){
             Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1761,17 +1765,17 @@ Trapezoid(){
             }
         }
         for(i=0;i<Inverse_Trigonometric_Value;i++){
-            if(ttrbase[i]==1){
-                Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            if(itrbase[i]==1){
+                Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
-            else if(ttrbase[i]==2){
-                Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            else if(itrbase[i]==2){
+                Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
-            else if(ttrbase[i]==3){
-                Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            else if(itrbase[i]==3){
+                Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
             else{
-                Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
         }
 
@@ -1783,8 +1787,8 @@ Trapezoid(){
             Sum=Sum+xcoef[i]*pow(x,xexp[i]);
         }
         for(i=0;i<us;i++){
-            temp=usxcoef[i]*pow(x,usxexp[i]);
-            Sum=Sum+usfncoef[i]*pow(pow(usbase[i],temp),usfnexp[i]);
+            temp=exxcoeff[i]*pow(x,exxexp[i]);
+            Sum=Sum+exfncoeff[i]*pow(pow(exbase[i],temp),exfnexp[i]);
         }
         for(i=0;i<Logarithmic_Value;i++){
             Sum=Sum+lgfncoef[i]*pow(log10(lgxcoef[i]*pow(x,lgxexp[i]))/log10(lgbase[i]),lgfnexp[i]);
@@ -1804,17 +1808,17 @@ Trapezoid(){
             }
         }
         for(i=0;i<Inverse_Trigonometric_Value;i++){
-            if(ttrbase[i]==1){
-                Sum=Sum+ttrfncoef[i]*(pow(asin(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            if(itrbase[i]==1){
+                Sum=Sum+itrfncoeff[i]*(pow(asin(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
-            else if(ttrbase[i]==2){
-                Sum=Sum+ttrfncoef[i]*(pow(acos(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            else if(itrbase[i]==2){
+                Sum=Sum+itrfncoeff[i]*(pow(acos(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
-            else if(ttrbase[i]==3){
-                Sum=Sum+ttrfncoef[i]*(pow(atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+            else if(itrbase[i]==3){
+                Sum=Sum+itrfncoeff[i]*(pow(atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
             else{
-                Sum=Sum+ttrfncoef[i]*(pow(PI/2-atan(ttrxcoef[i]*pow(x,ttrxexp[i])),ttrfnexp[i]));
+                Sum=Sum+itrfncoeff[i]*(pow(PI/2-atan(itrxcoeff[i]*pow(x,itrxexp[i])),itrfnexp[i]));
             }
         }
 
@@ -1834,31 +1838,31 @@ Gregory_Newton(){
 
     int Element,i,j,n,y,z,Counter,Polynom_1_Size,Polynom_2_Size;
 
-    double k,Temp_Value,Sum,x0,h,x,s,xn,fx[10][3]={0};
+    double k,Temp_Value,Sum,Point_1,Point_Difference,x,s,xn,fx[10][3]={0};
     double xexp[10]={0},c,d,a[20],b[20],Prod[20],Prod_Sum[20]={0};
 
     system("cls");
 
-    printf("x0: ");
-    scanf("%lf",&x0);
+    printf("Point_1: ");
+    scanf("%lf",&Point_1);
 
     printf("\nh: ");
-    scanf("%lf",&h);
+    scanf("%lf",&Point_Difference);
 
     printf("\nn: ");
     scanf("%d",&n);
 
-    Temp_Value=x0;
+    Temp_Value=Point_1;
 
     for(i=0;i<n;i++){
-        printf("\nf(%lf): ",x0);
-        fx[i][0]=x0;
+        printf("\nf(%lf): ",Point_1);
+        fx[i][0]=Point_1;
         scanf("%lf",&fx[i][1]);
 
-        x0=x0+h;
+        Point_1=Point_1+Point_Difference;
     }
 
-    x0=Temp_Value;
+    Point_1=Temp_Value;
 
     for(j=1;j<n;j++){
         for(i=0;i<n-j;i++){
@@ -1874,7 +1878,7 @@ Gregory_Newton(){
     printf("\nxn: ");
     scanf("%lf",&xn);
 
-    s=(xn-x0)/h;
+    s=(xn-Point_1)/Point_Difference;
     Sum=0;
 
     for(i=0;i<n;i++){
@@ -1901,7 +1905,7 @@ Gregory_Newton(){
     getch();
 
     system("cls");
-    }
+}
 
 int main() {
     int operation;
@@ -1992,22 +1996,27 @@ int main() {
         
             printf("Enter Polynom Degree: \n");
             scanf("%lf", &Regula_Degree);
+
             printf("Enter tolerance value\n");
             scanf("%lf", &Regula_Tolerance);
 
             printf("Enter floor and ceiling for bisection method.\n");
+
             printf("For floor: ");
             scanf("%lf", &Regula_Floor);
+
             printf("For ceiling: ");
             scanf("%lf", &Regula_Ceiling);
 
             if (Regula_Floor > Regula_Ceiling) {
+
                 printf("You entered wrong floor and ceiling value !!!!!\n");
                 printf("Switching values.\n");
                 double Regula_Switch_Temp = Regula_Floor;
                 Regula_Floor = Regula_Ceiling;
                 Regula_Ceiling = Regula_Switch_Temp;
                 printf("[%lf,%lf]\n", Regula_Floor, Regula_Ceiling);
+
             }
 
             if (Regula_Floor == Regula_Ceiling) {
@@ -2048,7 +2057,7 @@ int main() {
             Inverse_Matrix();
             break;
         case 5:
-            gausselimination();
+            Gauss_Elimination();
             break;
 
         case 6:
@@ -2059,10 +2068,13 @@ int main() {
             break;
         case 8:
             Simpson();
+            break;
         case 9:
             Trapezoid();
+            break;
         case 10:
             Gregory_Newton();
+            break;
 
 
     default:
