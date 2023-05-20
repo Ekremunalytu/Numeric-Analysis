@@ -1666,6 +1666,79 @@ Trapezoid(){
     system("cls");
 }
 
+Gregory_Newton(){
+
+    int Element,i,j,n,y,z,Counter,Polynom_1_Size,Polynom_2_Size;
+
+    double k,Temp_Value,Sum,x0,h,x,s,xn,fx[10][3]={0};
+    double xexp[10]={0},c,d,a[20],b[20],Prod[20],Prod_Sum[20]={0};
+
+    system("cls");
+
+    printf("x0: ");
+    scanf("%lf",&x0);
+
+    printf("\nh: ");
+    scanf("%lf",&h);
+
+    printf("\nn: ");
+    scanf("%d",&n);
+
+    Temp_Value=x0;
+
+    for(i=0;i<n;i++){
+        printf("\nf(%lf): ",x0);
+        fx[i][0]=x0;
+        scanf("%lf",&fx[i][1]);
+
+        x0=x0+h;
+    }
+
+    x0=Temp_Value;
+
+    for(j=1;j<n;j++){
+        for(i=0;i<n-j;i++){
+            if(i==0){
+                fx[j-1][2]=fx[i][1];
+            }
+            fx[i][1]=fx[i+1][1]-fx[i][1];
+        }
+    }
+
+    fx[n-1][2]=fx[0][1];
+
+    printf("\nxn: ");
+    scanf("%lf",&xn);
+
+    s=(xn-x0)/h;
+    Sum=0;
+
+    for(i=0;i<n;i++){
+
+        Temp_Value=1;
+
+        if(i==0){
+            Sum=fx[i][2];
+        }
+        else if(i==1){
+            Sum=Sum+(s*fx[i][2]);
+        }
+        else{
+            for(j=0;j<i;j++){
+                Temp_Value=Temp_Value*(s-j)/(j+1);
+            }
+
+            Sum=Sum+Temp_Value*fx[i][2];
+            
+        }
+    }
+
+    printf("\nResult: %lf\nPress any button to continue",Sum);
+    getch();
+
+    system("cls");
+    }
+
 int main() {
     int operation;
     int in_program = 1;
@@ -1692,6 +1765,7 @@ int main() {
         printf("Enter 7 to perform derivation operation\n");
         printf("Enter 8 to perform simpson method\n");
         printf("Enter 9 to perform trapeozid method\n");
+        printf("Enter 10 to perform gregory newton method\n");
         scanf("%d" , &operation);
         
 
@@ -1815,6 +1889,8 @@ int main() {
             Simpson();
         case 9:
             Trapezoid();
+        case 10:
+            Gregory_Newton();
 
 
     default:
