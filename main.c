@@ -384,6 +384,84 @@ Newton_Ralphson(){
 	system("cls");
 }
 
+Inverse_Matrix(){
+
+    int i,j,x,y,Matrix_Size;
+
+    double Matrix[10][10],Inverse_Matrix[10][10],Temp,Inverse_Temp;
+
+    printf("Enter square matrix size:  ");
+    scanf("%d",&Matrix_Size);
+
+    for(i=0;i<Matrix_Size;i++){
+        for(j=0;j<Matrix_Size;j++){
+
+            printf("\n[%d][%d] :",i,j);
+            scanf("%lf",&Matrix[i][j]);
+
+            if(i==j){
+                Inverse_Matrix[i][j]=1;
+            }
+            else {
+                Inverse_Matrix[i][j]=0;
+            }
+        }
+    }
+
+    system("cls");
+
+    printf("Printing matrix ..... \n");
+
+    for(i=0;i<Matrix_Size;i++){
+        printf("\n");
+        for(j=0;j<Matrix_Size;j++){
+            printf("	%lf",Matrix[i][j]);
+        }
+    }
+
+    for(i=0;i<Matrix_Size;i++){
+
+        Temp=Matrix[i][i];
+        
+        for(j=0;j<Matrix_Size;j++){
+            Matrix[i][j]=Matrix[i][j]/Temp;
+            Inverse_Matrix[i][j]=Inverse_Matrix[i][j]/Temp;
+        }
+        for(x=i+1;x<Matrix_Size;x++){
+            Temp=Matrix[x][i]*-1;
+            for(y=0;y<Matrix_Size;y++){
+                Matrix[x][y]=Temp*Matrix[i][y]+Matrix[x][y];
+                Inverse_Matrix[x][y]=Temp*Inverse_Matrix[i][y]+Inverse_Matrix[x][y];
+            }
+        }
+    }
+    for(j=Matrix_Size-1;j>-1;j--){
+        for(x=j-1;x>-1;x--){
+            Temp=Matrix[x][j]*-1;
+            for(y=0;y<Matrix_Size;y++){
+                Matrix[x][y]=Matrix[x][y]+Temp*Matrix[j][y];
+                Inverse_Matrix[x][y]=Inverse_Matrix[x][y]+Temp*Inverse_Matrix[j][y];
+            }
+        }
+    }
+
+    printf("\n\nPrinting Inverse matrix ....\n");
+
+    for(i=0;i<Matrix_Size;i++){
+        printf("\n");
+        for(j=0;j<Matrix_Size;j++){
+            printf("	%lf",Inverse_Matrix[i][j]);
+        }
+    }
+
+    printf("\n\nPress any button to continue");
+    getch();
+
+    system("cls");
+
+}
+
+
 
 Gauss_Seidel(){
     int i,j,x,y,Column,Dominant_Finder,Slope,N,Current_Iteration,Max_Iteration,Iterate;
@@ -1761,6 +1839,7 @@ int main() {
         printf("Enter 1 to perform bisection method\n");
         printf("Enter 2 to perform regula-falsi method\n");
         printf("Enter 3 to perform newton ralphson method\n");
+        printf("Enter 4 to perform inverse matrix operation\n");
         printf("Enter 6 to perform  Gauss seidel method\n");
         printf("Enter 7 to perform derivation operation\n");
         printf("Enter 8 to perform simpson method\n");
@@ -1877,6 +1956,9 @@ int main() {
 
         case 3:
             Newton_Ralphson();
+            break;
+        case 4:
+            Inverse_Matrix();
             break;
 
         case 6:
