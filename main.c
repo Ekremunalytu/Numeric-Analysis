@@ -28,6 +28,11 @@ double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisec
     while ((Bisection_Ceiling-Bisection_Floor) > Bisection_Tolerance && Iteration < Max_Iteration) {
         Middle = (Bisection_Floor+Bisection_Ceiling) / 2.0;
         F_Middle = Polynom(Middle, Bisection_Coefficient, Bisection_Exponent, Bisection_Degree);
+        printf("\nFloor: %lf", Bisection_Floor);
+        printf("\nCeiling: %lf" , Bisection_Ceiling);
+        printf("\nMiddle:  %lf" , Middle);
+        printf("\nMiddle: %lf" , F_Middle);
+        printf("\nIteration: %d\n" , Iteration);
 
         if (F_Middle == 0.0) {
             return Middle;
@@ -38,10 +43,10 @@ double Bisection(double Bisection_Floor, double Bisection_Ceiling, double *Bisec
             Bisection_Floor = Middle;
             F_Floor = F_Middle;
         }
-
+        
         Iteration++;
     }
-
+    printf("\n");
     return (Bisection_Floor+Bisection_Ceiling) / 2.0;
 }
 
